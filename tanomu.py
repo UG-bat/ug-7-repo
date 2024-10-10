@@ -1,5 +1,5 @@
 import streamlit as st
-from pages import Upload_pdf, QA_pdf  # pagesディレクトリからモジュールをインポート
+from onegai import onegai, kitekure  # onegaiディレクトリからモジュールをインポート
 
 # ページ初期設定
 def init_page():
@@ -20,9 +20,9 @@ def main():
         st.title("Home Page")
         st.write("This is the home page.")
     elif page == "Upload PDF":
-        Upload_pdf.show()  # Upload_pdf.pyの中のshow関数を呼び出す
+        onegai.show()  # onegai.pyの中のshow関数を呼び出す
     elif page == "PDF QA":
-        QA_pdf.show()  # QA_pdf.pyの中のshow関数を呼び出す
+        kitekure.show()  # kitekure.pyの中のshow関数を呼び出す
 
 def main():
     init_page()
