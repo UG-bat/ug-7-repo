@@ -8,10 +8,9 @@ def init_page():
         page_icon="📄"
     )
 
-# アプリのメインロジック
 def main():
     init_page()
-
+    
     st.sidebar.title("Navigation")  # サイドバーにタイトルを設定
     page = st.sidebar.selectbox("Select a page", ["Home", "Upload PDF", "PDF QA"])  # ページ選択
 
@@ -23,9 +22,6 @@ def main():
         onegai.show()  # onegai.pyの中のshow関数を呼び出す
     elif page == "PDF QA":
         kitekure.show()  # kitekure.pyの中のshow関数を呼び出す
-
-def main():
-    init_page()
 
     st.sidebar.success("上のメニューから選択してください。")
 
