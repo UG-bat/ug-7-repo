@@ -1,6 +1,6 @@
 import streamlit as st
-from onegai.onegai import show  # onegaiディレクトリからモジュールをインポート
-from onegai.kitekure import show
+from onegai.onegai import show as onegai_show  # onegaiディレクトリからモジュールをインポート
+from onegai.kitekure import show asnkitekure_show
 
 # ページ初期設定
 def init_page():
@@ -20,9 +20,9 @@ def main():
         st.title("Home Page")
         st.write("This is the home page.")
     elif page == "Upload PDF":
-        onegai.show()  # onegai.pyの中のshow関数を呼び出す
+        onegai_show()  # onegai.pyの中のshow関数を呼び出す
     elif page == "PDF QA":
-        kitekure.show()  # kitekure.pyの中のshow関数を呼び出す
+        kitekure_show()  # kitekure.pyの中のshow関数を呼び出す
 
     st.sidebar.success("上のメニューから選択してください。")
 
