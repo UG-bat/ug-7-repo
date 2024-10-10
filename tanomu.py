@@ -1,5 +1,6 @@
 import streamlit as st
-from onegai import onegai, kitekure  # onegaiディレクトリからモジュールをインポート
+from onegai.onegai import show  # onegaiディレクトリからモジュールをインポート
+from onegai.kitekure import show
 
 # ページ初期設定
 def init_page():
