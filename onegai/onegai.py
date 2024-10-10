@@ -3,6 +3,7 @@ import streamlit as st
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from onegai.onegai import show
 
 ###### dotenv を利用しない場合は消してください ######
 try:
@@ -20,6 +21,11 @@ def init_page():
         page_icon="📄"
     )
     st.sidebar.title("Options")
+
+def show():
+    st.title("Upload PDF")
+    st.write("PDFファイルをアップロードしてください。")
+
 
 
 def init_messages():
