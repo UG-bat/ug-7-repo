@@ -17,17 +17,13 @@ except ImportError:
     warnings.warn("dotenv not found. Please make sure to set your environment variables manually.", ImportWarning)
 ################################################
 
+
 def init_page():
     st.set_page_config(
-        page_title="Ask about PDF",
-        page_icon="🚥",
+        page_title="Ask My PDF(s)",
+        page_icon="🧐"
     )
-
-
-def show():
-    st.title("PDF QA")
-    st.write("Ask questions about the uploaded PDF.")
-    # アップロードされたPDFに対して質問をする処理などを書く
+    st.sidebar.title("Options")
 
 
 def select_model(temperature=0):
@@ -93,14 +89,12 @@ def page_ask_my_pdf():
 
 def main():
     init_page()
-    st.title("PDF QA")
+    st.title("PDF QA 🧐")
     if "vectorstore" not in st.session_state:
-        st.warning("まずは Upload PDF からPDFファイルをアップロードしてください。")
+        st.warning("まずは 📄 Upload PDF(s) からPDFファイルをアップロードしてね")
     else:
         page_ask_my_pdf()
 
 
 if __name__ == '__main__':
     main()
-
-
