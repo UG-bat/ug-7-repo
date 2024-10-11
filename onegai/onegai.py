@@ -13,6 +13,26 @@ except ImportError:
     warnings.warn("dotenv not found. Please make sure to set your environment variables manually.", ImportWarning)
 ################################################
 
+# PDFのアップロード処理
+def upload_pdf():
+    st.write("upload_pdf()関数が実行されています")
+    st.title("Upload PDF")
+    uploaded_file = st.file_uploader("PDFファイルをアップロードしてください", type="pdf")
+
+    if uploaded_file is not None:
+        st.write("PDFファイルがアップロードされました。")
+        pdf_text = ""
+        with fitz.open(stream=uploaded_file.read(), filetype="pdf") as doc:
+            for page in doc:
+                pdf_text += page.get_text()
+
+        # PDFの内容を確認
+        st.text_area("PDFの内容", pdf_text[:5000])  # 5000文字まで表示
+
+        # セッションにPDFのテキストを保存
+        st.session_state['pdf_text'] = pdf_text
+        st.success("PDFのテキストが保存されました。")
+
 
 def init_page():
     st.set_page_config(
@@ -37,7 +57,7 @@ def get_pdf_text():
     # file_uploader でPDFをアップロードする
     # (file_uploaderの詳細な説明は第6章をご参照ください)
     pdf_file = st.file_uploader(
-        label='Upload your PDF 😇',
+        label='Upload your PDF',
         type='pdf'  # PDFファイルのみアップロード可
     )
     if pdf_file:
