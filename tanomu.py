@@ -9,6 +9,26 @@ def init_page():
         page_icon="📄"
     )
 
+# PDFのアップロード処理
+def upload_pdf():
+    st.title("Upload PDF")
+    uploaded_file = st.file_uploader("PDFファイルをアップロードしてください", type="pdf")
+    
+    if uploaded_file is not None:
+        st.write("PDFファイルがアップロードされました。")
+        pdf_text = ""
+        with fitz.open(stream=uploaded_file.read(), filetype="pdf") as doc:
+            for page in doc:
+                pdf_text += page.get_text()
+
+        # PDFの内容を確認
+        st.text_area("PDFの内容", pdf_text[:5000])  # 5000文字まで表示
+
+        # セッションにPDFのテキストを保存
+        st.session_state['pdf_text'] = pdf_text
+        st.success("PDFのテキストが保存されました。")
+
+
 def main():
     init_page()
     
