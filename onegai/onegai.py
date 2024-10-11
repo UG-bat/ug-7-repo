@@ -13,17 +13,13 @@ except ImportError:
     warnings.warn("dotenv not found. Please make sure to set your environment variables manually.", ImportWarning)
 ################################################
 
+
 def init_page():
     st.set_page_config(
         page_title="Upload PDF(s)",
         page_icon="📄"
     )
     st.sidebar.title("Options")
-
-def show():
-    st.title("Upload PDF")
-    st.write("PDFファイルをアップロードしてください。")
-
 
 
 def init_messages():
@@ -33,18 +29,23 @@ def init_messages():
 
 
 def get_pdf_text():
+    # file_uploader でPDFをアップロードする
+    # (file_uploaderの詳細な説明は第6章をご参照ください)
     pdf_file = st.file_uploader(
-        label='Upload your PDF',
-        type='pdf'
+        label='Upload your PDF 😇',
+        type='pdf'  # PDFファイルのみアップロード可
     )
     if pdf_file:
         pdf_text = ""
         with st.spinner("Loading PDF ..."):
+            # PyMuPDFでPDFを読み取る
+            # (詳細な説明はライブラリの公式ページなどをご参照ください)
             pdf_doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
             for page in pdf_doc:
                 pdf_text += page.get_text()
 
-
+        # RecursiveCharacterTextSplitter でチャンクに分割する
+        # (詳細な説明は第6章をご参照ください)
         text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
             model_name="text-embedding-3-small",
             # 適切な chunk size は質問対象のPDFによって変わるため調整が必要
@@ -94,5 +95,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
